@@ -52,11 +52,11 @@ Users will also be able to view the terms and conditions of their payment plan, 
 
 ## UI Mockup
 
-![Sign In.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6d0989d0-4184-4f57-aa93-4719512b51ad/Sign_In.png)
+![Sign In.png](./assets/Sign%20In.png)
 
-![Create Group.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/69486c2a-5955-4fa4-a26c-699bc3baacf4/Create_Group.png)
+![Create Group.png](./assets/Create%20Group.png)
 
-![Join Group.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f4e8fbde-3b4a-487d-b5b8-907acb1eb5be/Join_Group.png)
+![Join Group.png](./assets/Join%20Group.png)
 
 ## Work Distribution
 
