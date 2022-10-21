@@ -60,3 +60,43 @@ CREATE TABLE Payment (
     FOREIGN KEY (recipientID) REFERENCES User(userID)
 );
 ```
+
+## Advanced Queries
+
+### Query 1
+
+Our first query returns the number of pending user invitations per university. We first join the `University` table with the `User` table, then group by the `universityID`. We order the outputby descending number of users. 
+
+#### Code
+```sql
+select un.universityName, count(*) as numUsers
+from University un
+natural join User us
+group by un.universityID
+order by numUsers desc;
+```
+
+#### Result
+![](./assets/query1.png)
+
+### Query 2
+
+Our second query returns the number of accepted users for every university and subscription service. We begin by joining the `User`, `Membership`, `Family`, `SubscriptionService`, and `University` tables. We then filter by accepted members, and group by both `universityID` and `serviceName`. We order the output by the `universityName` in ascending order and aggregated `numUsers` in descending order. Finally, we limit the length of the output to 15 rows for visualization. 
+
+#### Code
+```sql
+select un.universityName, ss.serviceName, count(*) as numUsers
+from User us
+join Membership m
+    on m.memberID = us.userID
+natural join Family f
+natural join SubscriptionService ss
+natural join University un
+where m.memberStatus = "Accepted"
+group by un.universityID, ss.serviceName
+order by un.universityName asc, numUsers desc
+limit 15;
+```
+
+#### Result
+![](./assets/query2.png)
