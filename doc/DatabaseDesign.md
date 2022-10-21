@@ -153,7 +153,7 @@ limit 15;
 
 Below is the performance of our query without any added indexes. Between each index, we made sure to drop the added index from the previous part, to ensure standardization between comparisons. 
 
-![](./assets/indexing_1_original.png)
+![](./assets/indexing_2_original.png)
 
 #### Index 1
 
@@ -165,6 +165,34 @@ alter table Membership add index memId(memberStatus);
 
 The output of our analyze query follows: 
 
-![](./assets/indexing_1_1.png)
+![](./assets/indexing_2_1.png)
 
-We see a speedup in the "Filter" command that addresses `m.memberStatus = "Pending"`, and an overall speedup in the whole query, so we can conclude that this index is a good optimization to add for this specific query. 
+This time around, we find that the new index actually slows down both the individual runtime of our filtering step and the runtime of the overall query, so this would not be a good index to add to optimize our second query. 
+
+#### Index 2
+
+For our second index design, we added an index on `Family.familyID` because it is used to join the `Family` table with the `Membership` table. 
+
+```sql
+alter table Family add index famId(familyID);
+```
+
+The output of our analyze query follows: 
+
+![](./assets/indexing_2_2.png)
+
+We find a significant improvement from using the new index. There is a cascaded speedup in the runtime of all of the nested inner joins, and a resulting speedup on the overall query as well, shown at the bottom.
+
+#### Index 3
+
+For our third index design, we tried a similar approach as the previous indexing step, adding an indexing to `Membership.memberID`, which is used in one of the inner joins. 
+
+```sql
+alter table Membership add index memId(memberID);
+```
+
+The output of our analyze query follows: 
+
+![](./assets/indexing_2_3.png)
+
+We find an even bigger improvement by using the `memberID` index, again both in the several inner joins, and in the query as a whole, more than halving the runtime. As a result, we might next try to implement both indexes at once, to increase the speedup of the query even further, but this would need to be analyzed again to be sure. 
