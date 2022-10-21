@@ -79,6 +79,54 @@ order by numUsers desc;
 #### Result
 ![](./assets/query1.png)
 
+#### Initial Performance 
+
+Below is the performance of our query without any added indexes. Between each index, we made sure to drop the added index from the previous part, to ensure standardization between comparisons. 
+
+![](./assets/indexing_1_original.png)
+
+#### Index 1
+
+For our first index design, we added an index on `Membership.memberStatus` because we filter on that column in the query. 
+
+```sql
+alter table Membership add index memId(memberStatus);
+```
+
+The output of our analyze query follows: 
+
+![](./assets/indexing_1_1.png)
+
+We see a speedup in the "Filter" command that addresses `m.memberStatus = "Pending"`, and an overall speedup in the whole query, so we can conclude that this index is a good optimization to add for this specific query. 
+
+#### Index 2
+
+For our second index design, we added an index on `University.universityName` because we use it in the grouping step of our query. 
+
+```sql
+alter table University add index uniName(universityName);
+```
+
+The output of our analyze query follows: 
+
+![](./assets/indexing_1_2.png)
+
+We see some marginal performance improvement on the aggregation step of the query, which means that we could still use this index design as well. 
+
+#### Index 3
+
+For our third index design, we added an index on `User.userID`, which is used to join the two tables. 
+
+```sql
+alter table User add index useId(userID);
+```
+
+The output of our analyze query follows: 
+
+![](./assets/indexing_1_3.png)
+
+We again see some improvement in the actual time of both the single iteration and total iteration times of the nested loop inner join. We actually also see speedups in the sort and aggregation processes, so this is also a good index to add for our query. 
+
 ### Query 2
 
 Our second query returns the number of accepted users for every university and subscription service. We begin by joining the `User`, `Membership`, `Family`, `SubscriptionService`, and `University` tables. We then filter by accepted members, and group by both `universityID` and `serviceName`. We order the output by the `universityName` in ascending order and aggregated `numUsers` in descending order. Finally, we limit the length of the output to 15 rows for visualization. 
@@ -100,3 +148,23 @@ limit 15;
 
 #### Result
 ![](./assets/query2.png)
+
+#### Initial Performance 
+
+Below is the performance of our query without any added indexes. Between each index, we made sure to drop the added index from the previous part, to ensure standardization between comparisons. 
+
+![](./assets/indexing_1_original.png)
+
+#### Index 1
+
+For our first index design, we added an index on `Membership.memberStatus` because we filter on that column in the query. 
+
+```sql
+alter table Membership add index memId(memberStatus);
+```
+
+The output of our analyze query follows: 
+
+![](./assets/indexing_1_1.png)
+
+We see a speedup in the "Filter" command that addresses `m.memberStatus = "Pending"`, and an overall speedup in the whole query, so we can conclude that this index is a good optimization to add for this specific query. 
