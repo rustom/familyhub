@@ -1,5 +1,15 @@
 # Database Design
 
+The code that we used to populate the tables with simulated data can be found in the `generateDemoData.ipynb` file in this directory. 
+
+## Proof of Database Connection and Tables Created
+
+![](./assets/database_connection.png)
+
+## Proof of Table Size
+
+![](./assets/proof_of_table_size.png)
+
 ## DDL Commands
 
 ```sql
@@ -65,15 +75,18 @@ CREATE TABLE Payment (
 
 ### Query 1
 
-Our first query returns the number of pending user invitations per university. We first join the `University` table with the `User` table, then group by the `universityID`. We order the outputby descending number of users. 
+Our first query returns the number of pending user invitations per university. We first join the `University` table with the `User` table, then group by the `universityID`. We order the output by descending number of users. 
 
 #### Code
 ```sql
-select un.universityName, count(*) as numUsers
+select un.universityName, count(*) as numPending
 from University un
 natural join User us
-group by un.universityID
-order by numUsers desc;
+join Membership m
+on m.memberID = us.userID
+where m.memberStatus = "Pending"
+group by un.universityName
+order by numPending desc;
 ```
 
 #### Result
