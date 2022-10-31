@@ -1,28 +1,28 @@
 {
-  "private": true,
-  "description": "FamilyHub",
-  "repository": "",
-  "homepage": "",
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
-  },
-  "author": "Rustom Ichhaporia <rustom@rustom.dev>",
-  "dependencies": {
-    "bluebird": "^3.7.2",
-    "mysql2": "^2.3.3",
-    "next": "^12.3.1",
-    "next-auth": "^4.14.0",
-    "nodemailer": "^6",
-    "promise-mysql": "^5.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "serverless-mysql": "^1.5.4"
-  },
-  "devDependencies": {
-    "@types/node": "^17",
-    "@types/react": "^18.0.15",
-    "typescript": "^4"
-  }
+    "private": true,
+    "description": "FamilyHub",
+    "repository": "",
+    "homepage": "",
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start"
+    },
+    "author": "Rustom Ichhaporia <rustom@rustom.dev>",
+    "dependencies": {
+        "bluebird": "^3.7.2",
+        "mysql2": "^2.3.3",
+        "next": "^12.3.1",
+        "next-auth": "^4.14.0",
+        "nodemailer": "^6",
+        "promise-mysql": "^5.2.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "serverless-mysql": "^1.5.4"
+    },
+    "devDependencies": {
+        "@types/node": "^17",
+        "@types/react": "^18.0.15",
+        "typescript": "^4"
+    }
 }
