@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import AccessDenied from '../components/access-denied'
 import Button from 'components/button'
+import styled from 'styled-components'
 
 const MyCourses = styled.div``
 
@@ -13,9 +14,10 @@ export default function Home() {
   // Fetch content from protected route
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch('/api/examples/database')
+      const res = await fetch('/api/user/read')
       const json = await res.json()
       console.log('hii')
+      console.log(JSON.stringify(json))
       setContent(json[0])
 
       // if (json.content) {
@@ -24,6 +26,20 @@ export default function Home() {
     }
     fetchData()
   }, [session])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch('/api/family/search')
+  //     const json = await res.json()
+  //     console.log('hii')
+  //     setContent(json[0])
+
+  //     // if (json.content) {
+  //     //   setContent(json.content)
+  //     // }
+  //   }
+  //   fetchData()
+  // }, [session])
 
   // If no session exists, display access denied message
   if (!session) {
@@ -41,12 +57,24 @@ export default function Home() {
       <p>
         <strong>{JSON.stringify(content) ?? '\u00a0'}</strong>
       </p>
+      <p>
+        Name: {content?.userName}
+      </p>
+      <p>
+        Email: {content?.email}
+      </p>
+      <p>
+        University: {content?.universityName}
+      </p>
+      <p>
+        City: {content?.city}
+      </p>
 
       <Button link={'/new-family'} title={'New Family'} />
       <Button link={'/join-family'} title={'Join Family'} />
 
       <MyCourses>
-        {content}
+
       </MyCourses>
 
       <p>
