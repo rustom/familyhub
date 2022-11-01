@@ -4,24 +4,26 @@ import Layout from 'components/layout'
 import AccessDenied from '../components/access-denied'
 import Button from 'components/button'
 
+const MyCourses = styled.div``
+
 export default function Home() {
   const { data: session } = useSession()
   const [content, setContent] = useState()
 
   // Fetch content from protected route
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch('/api/examples/database')
-  //     const json = await res.json()
-  //     console.log('hii')
-  //     setContent(json[0])
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch('/api/examples/database')
+      const json = await res.json()
+      console.log('hii')
+      setContent(json[0])
 
-  //     // if (json.content) {
-  //     //   setContent(json.content)
-  //     // }
-  //   }
-  //   fetchData()
-  // }, [session])
+      // if (json.content) {
+      //   setContent(json.content)
+      // }
+    }
+    fetchData()
+  }, [session])
 
   // If no session exists, display access denied message
   if (!session) {
@@ -40,7 +42,13 @@ export default function Home() {
         <strong>{JSON.stringify(content) ?? '\u00a0'}</strong>
       </p>
 
-      <Button link={'/new-family'} title={'bruh'} />
+      <Button link={'/new-family'} title={'New Family'} />
+      <Button link={'/join-family'} title={'Join Family'} />
+
+      <MyCourses>
+        {content}
+      </MyCourses>
+
       <p>
         asdfasdf
       </p>
