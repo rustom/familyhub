@@ -9,7 +9,7 @@ const MyCourses = styled.div``
 
 export default function Home() {
   const { data: session } = useSession()
-  const [content, setContent] = useState()
+  const [userContent, setContent] = useState()
 
   // Fetch content from protected route
   useEffect(() => {
@@ -55,19 +55,19 @@ export default function Home() {
     <Layout>
       <h1>Protected Page</h1>
       <p>
-        <strong>{JSON.stringify(content) ?? '\u00a0'}</strong>
+        <strong>{JSON.stringify(userContent) ?? '\u00a0'}</strong>
       </p>
       <p>
-        Name: {content?.userName}
+        Name: {userContent?.userName}
       </p>
       <p>
-        Email: {content?.email}
+        Email: {userContent?.email}
       </p>
       <p>
-        University: {content?.universityName}
+        University: {userContent?.universityName}
       </p>
       <p>
-        City: {content?.city}
+        City: {userContent?.city}
       </p>
 
       <Button link={'/new-family'} title={'New Family'} />
