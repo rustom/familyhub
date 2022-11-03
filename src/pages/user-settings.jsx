@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import styled from 'styled-components'
+import { unstable_renderSubtreeIntoContainer } from 'react-dom'
 
 const MyCourses = styled.div``
 
@@ -9,6 +10,7 @@ export default function Home() {
   const { data: session } = useSession()
   const [universityData, setUniversityData] = useState()
   const [userContent, setUserContent] = useState()
+  const [submitted, setSubmitted] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,9 +19,11 @@ export default function Home() {
       console.log(JSON.stringify(json))
 
       setUserContent(json[0])
+      setNewName(json[0].userName)
+      setNewUniversityName(json[0].universityName)
     }
     fetchData()
-  }, [session])
+  }, [submitted])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,19 +36,28 @@ export default function Home() {
     fetchData()
   }, [session])
 
-  const [newName, setNewName] = useState('')
-  const [newUniversityName, setNewUniversityName] = useState('')
+  const [userName, setNewName] = useState('')
+  const [universityName, setNewUniversityName] = useState('')
+  
+  // const handleChange = (event) => {
+  //   const name = event.target.name;
+
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // alert('A name was submitted: ' + newName);
-    const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+    const postData = async () => {
+      const res = await fetch('/api/user/update', { method: 'PUT', body: JSON.stringify({ userName: userName, universityName: universityName }) })
+      const json = await res.json()
+    }
+    postData()
 
-    alert(name + ': ' + value + ' was submitted.')
+    alert('Thanks for submitting! Your info should now be updated.');
+    setSubmitted(submitted + 1)
   }
 
   // If session exists, display content
@@ -65,18 +78,20 @@ export default function Home() {
       </p>
       <form onSubmit={handleSubmit}>
         <h2>
-          Change your settings:
+          Change your settings below. Your email cannot be changed because it is linked to your sign in.
         </h2>
 
         <label>
           Name:{'  '}
-          <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
+          <input type="text" value={userName} onChange={(e) => setNewName(e.target.value)} />
         </label>
         <br /> <br />
         <label>
           {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
           University: {'  '}
-          <select>
+          <select value={universityName} onChange={(e) => setNewUniversityName(e.target.value)}>
+            <option selected value="">
+            </option>
             {universityData?.map((row) => (
               <option value={row.universityName}>{row.universityName}</option>
             ))}
