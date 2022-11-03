@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: IBM Plex Sans;
 
     a {
-      text-decoration: none;
+      // text-decoration: none;
       :link {
         color: ${theme.colors.accent};
       }
@@ -16,11 +16,11 @@ const GlobalStyle = createGlobalStyle`
         color: ${theme.colors.accent};
       }
       :hover {
-        color: ${theme.colors.accent};
+        color: ${theme.colors.text};
         text-decoration: underline;
       }
       :active {
-        color: ${theme.colors.accent};
+        color: ${theme.colors.text};
       }
     }
   };

@@ -16,7 +16,6 @@ export default function Home() {
     const fetchData = async () => {
       const res = await fetch('/api/user/read')
       const json = await res.json()
-      console.log('hii')
       console.log(JSON.stringify(json))
       setContent(json[0])
 
@@ -73,10 +72,11 @@ export default function Home() {
       <Button link={'/new-family'} title={'New Family'} />
       <Button link={'/join-family'} title={'Join Family'} />
       <Button link={'/stats'} title={'Site Statistics'} />
-
+      <Button link={'/user-settings'} title={'User Settings'} />
+{/* 
       <MyCourses>
 
-      </MyCourses>
+      </MyCourses> */}
     </Layout>
   )
 }

@@ -18,40 +18,35 @@ import { motion } from 'framer-motion';
 // `
 
 
-const Box = styled(motion.div)`
-  margin: auto;
-  padding: 0 20px 0 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: ${theme.colors.accent};
-  border-radius: 0.6rem;
-`
+// const Box = styled(motion.div)`
+//   margin: 10px;
+//   max-width: 400px;
+//   padding: 0 15px 0 15px;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: ${theme.colors.accent};
+//   border-radius: 0.6rem;
+// `
 
 const ButtonLink = styled(Link)`
-  color: #fff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
 `
 
-const ButtonText = styled.p`
-  font-size: 25px;
-  color: ${theme.colors.buttonText};
-`
+// const ButtonText = styled.a`
+//   text-decoration: underline;
+//   // color: ${theme.colors.buttonText};
+// `
 
 export default function Button({ link, title }) {
   return (
-    <Box>
-      <ButtonLink href={link}>
-        <ButtonText>
+    // <Box>
+    <ButtonLink href={link}>
+      {/* <ButtonText> */}
 
-          {title}
-        </ButtonText>
-      </ButtonLink>
-    </Box>
+      {title}
+      {/* </ButtonText> */}
+    </ButtonLink>
+    // </Box>
   )
 }

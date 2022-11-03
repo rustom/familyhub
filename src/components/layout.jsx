@@ -2,6 +2,8 @@ import GlobalStyle from 'styles/global-style'
 import Header from './header'
 import styled from 'styled-components'
 import theme from 'styles/theme'
+import AccessDenied from './access-denied'
+import { useSession } from 'next-auth/react'
 
 const Wrapper = styled.main`
 margin: 0;
@@ -38,17 +40,22 @@ const ContentBox = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  // text-align: center;
   max-width: 1000px;
 `
 
 export default function Layout({ children }) {
+  const { data: session } = useSession()
+
   return (
     <>
-      {/* <Header /> */}
       <GlobalStyle />
       <Wrapper>
-        <ContentBox>{children}</ContentBox>
+        {!session && (<AccessDenied />
+        )}
+        {session && (<ContentBox>{children}      <Header />
+        </ContentBox>)}
+
       </Wrapper>
     </>
   )

@@ -14,18 +14,6 @@ export default async function endpointWrapper(req, res, query) {
       database: process.env.DB_NAME, // e.g. 'my-database'
     })
 
-    // console.log('req\n' + JSON.stringify(req.query));
-
-    // const query = `select un.universityName, count(*) as numPending
-    // from University un
-    // natural join User us
-    // join Membership m
-    // on m.memberID = us.userID
-    // where m.memberStatus = "Pending"
-    // group by un.universityName
-    // order by numPending desc`
-
-    // console.log(query)
 
     const [rows, fields] = await connection.execute(query)
     // + (req.query.id && (' where userId=' + req.query.id))
@@ -40,3 +28,4 @@ export default async function endpointWrapper(req, res, query) {
     error: 'You must be signed in to view the protected content on this page.',
   })
 }
+

@@ -21,17 +21,19 @@ const Background = styled.div`
   background-color: ${theme.colors.background};
 
   // background: linear-gradient(35deg, #f17c58, #e94584, #24aadb, #ff3706);
-  // background-size: 600% 100%;
-  // animation: gradient 8s linear infinite;
-  // animation-direction: alternate;
-  // @keyframes gradient {
-  //   0% {
-  //     background-position: 0%;
-  //   }
-  //   100% {
-  //     background-position: 100%;
-  //   }
-  // }
+  background: linear-gradient(35deg, #735CDD, #9000B3, #7E007B, #37000A);
+
+  background-size: 600% 100%;
+  animation: gradient 8s linear infinite;
+  animation-direction: alternate;
+  @keyframes gradient {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 100%;
+    }
+  }
 `
 
 const Box = styled.div`
