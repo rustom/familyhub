@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${theme.colors.background};
     color: ${theme.colors.text};
-    font-family: IBM Plex Mono;
+    font-family: IBM Plex Sans;
 
     a {
       text-decoration: none;

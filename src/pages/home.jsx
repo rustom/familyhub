@@ -72,14 +72,11 @@ export default function Home() {
 
       <Button link={'/new-family'} title={'New Family'} />
       <Button link={'/join-family'} title={'Join Family'} />
+      <Button link={'/stats'} title={'Site Statistics'} />
 
       <MyCourses>
 
       </MyCourses>
-
-      <p>
-        asdfasdf
-      </p>
     </Layout>
   )
 }

@@ -7,7 +7,7 @@ const Wrapper = styled.main`
 margin: 0;
 padding: 0;
 width: 100%;
-height: 100%;
+// height: 100%;
 position: absolute;
 left: 0;
 top: 0;
@@ -39,7 +39,7 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  max-width: 800px;
+  max-width: 1000px;
 `
 
 export default function Layout({ children }) {
