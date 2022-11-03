@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       database: process.env.DB_NAME, // e.g. 'my-database'
     })
 
-    console.log('req\n\n\n' + req);
+    console.log('req\n\n\n' + req)
 
     const [rows, fields] = await connection.execute('SELECT * FROM University')
     console.log(JSON.parse(JSON.stringify(rows)))

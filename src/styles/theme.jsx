@@ -16,7 +16,7 @@ const palette = {
   grey2: '#444444',
   grey1: '#151515',
   black: '#000000',
-};
+}
 
 const theme = {
   colors: {
@@ -27,7 +27,7 @@ const theme = {
     accent: palette.lightBlue,
     accentLight: palette.peach2,
     accentDark: palette.darkBlue,
-    buttonText: palette.white
+    buttonText: palette.white,
   },
   fonts: {
     sans: 'IBM Plex Sans',
@@ -39,7 +39,7 @@ const theme = {
   sizes: {
     maxWidth: '600px',
   },
-  palette
-};
+  palette,
+}
 
-export default theme;
+export default theme

@@ -14,7 +14,6 @@ export default async function endpointWrapper(req, res, query) {
       database: process.env.DB_NAME, // e.g. 'my-database'
     })
 
-
     const [rows, fields] = await connection.execute(query)
     // + (req.query.id && (' where userId=' + req.query.id))
     // )
@@ -28,4 +27,3 @@ export default async function endpointWrapper(req, res, query) {
     error: 'You must be signed in to view the protected content on this page.',
   })
 }
-

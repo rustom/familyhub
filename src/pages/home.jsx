@@ -56,24 +56,16 @@ export default function Home() {
       <p>
         <strong>{JSON.stringify(userContent) ?? '\u00a0'}</strong>
       </p>
-      <p>
-        Name: {userContent?.userName}
-      </p>
-      <p>
-        Email: {userContent?.email}
-      </p>
-      <p>
-        University: {userContent?.universityName}
-      </p>
-      <p>
-        City: {userContent?.city}
-      </p>
+      <p>Name: {userContent?.userName}</p>
+      <p>Email: {userContent?.email}</p>
+      <p>University: {userContent?.universityName}</p>
+      <p>City: {userContent?.city}</p>
 
       <Button link={'/new-family'} title={'New Family'} />
       <Button link={'/join-family'} title={'Join Family'} />
       <Button link={'/stats'} title={'Site Statistics'} />
       <Button link={'/user-settings'} title={'User Settings'} />
-{/* 
+      {/* 
       <MyCourses>
 
       </MyCourses> */}

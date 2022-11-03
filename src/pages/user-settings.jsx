@@ -38,7 +38,7 @@ export default function Home() {
 
   const [userName, setNewName] = useState('')
   const [universityName, setNewUniversityName] = useState('')
-  
+
   // const handleChange = (event) => {
   //   const name = event.target.name;
 
@@ -48,15 +48,21 @@ export default function Home() {
   // }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     const postData = async () => {
-      const res = await fetch('/api/user/update', { method: 'PUT', body: JSON.stringify({ userName: userName, universityName: universityName }) })
-      const json = await res.json()
+      const res = await fetch('/api/user/update', {
+        method: 'PUT',
+        body: JSON.stringify({
+          userName: userName,
+          universityName: universityName,
+        }),
+      })
+      await res.json()
     }
     postData()
 
-    alert('Thanks for submitting! Your info should now be updated.');
+    alert('Thanks for submitting! Your info should now be updated.')
     setSubmitted(submitted + 1)
   }
 
@@ -64,41 +70,38 @@ export default function Home() {
   return (
     <Layout>
       <h1>User Settings</h1>
-      <p>
-        Name: {userContent?.userName}
-      </p>
-      <p>
-        Email: {userContent?.email}
-      </p>
-      <p>
-        University: {userContent?.universityName}
-      </p>
-      <p>
-        City: {userContent?.city}
-      </p>
+      <p>Name: {userContent?.userName}</p>
+      <p>Email: {userContent?.email}</p>
+      <p>University: {userContent?.universityName}</p>
+      <p>City: {userContent?.city}</p>
       <form onSubmit={handleSubmit}>
         <h2>
-          Change your settings below. Your email cannot be changed because it is linked to your sign in.
+          Change your settings below. Your email cannot be changed because it is
+          linked to your sign in.
         </h2>
-
         <label>
           Name:{'  '}
-          <input type="text" value={userName} onChange={(e) => setNewName(e.target.value)} />
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setNewName(e.target.value)}
+          />
         </label>
         <br /> <br />
         <label>
           {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
           University: {'  '}
-          <select value={universityName} onChange={(e) => setNewUniversityName(e.target.value)}>
-            <option selected value="">
-            </option>
+          <select
+            value={universityName}
+            onChange={(e) => setNewUniversityName(e.target.value)}
+          >
+            <option selected value=""></option>
             {universityData?.map((row) => (
               <option value={row.universityName}>{row.universityName}</option>
             ))}
           </select>
         </label>
         <br /> <br />
-
         <input type="submit" value="Submit" />
       </form>
       {/* 
@@ -108,4 +111,3 @@ export default function Home() {
     </Layout>
   )
 }
-

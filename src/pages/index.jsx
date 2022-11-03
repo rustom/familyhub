@@ -21,7 +21,7 @@ const Background = styled.div`
   background-color: ${theme.colors.background};
 
   // background: linear-gradient(35deg, #f17c58, #e94584, #24aadb, #ff3706);
-  background: linear-gradient(35deg, #735CDD, #9000B3, #7E007B, #37000A);
+  background: linear-gradient(35deg, #735cdd, #9000b3, #7e007b, #37000a);
 
   background-size: 600% 100%;
   animation: gradient 8s linear infinite;

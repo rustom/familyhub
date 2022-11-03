@@ -4,7 +4,7 @@ import styles from './header.module.css'
 import { LogoGoogle } from 'react-ionicons'
 import styled from 'styled-components'
 import theme from 'styles/theme'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 // const Box = styled(motion.div)`
 //   margin: auto;
@@ -16,7 +16,6 @@ import { motion } from 'framer-motion';
 //   background-color: ${theme.colors.accent};
 //   border-radius: 0.6rem;
 // `
-
 
 // const Box = styled(motion.div)`
 //   margin: 10px;
@@ -30,8 +29,7 @@ import { motion } from 'framer-motion';
 //   border-radius: 0.6rem;
 // `
 
-const ButtonLink = styled(Link)`
-`
+const ButtonLink = styled(Link)``
 
 // const ButtonText = styled.a`
 //   text-decoration: underline;

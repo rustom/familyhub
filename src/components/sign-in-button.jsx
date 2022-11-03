@@ -4,7 +4,7 @@ import styles from './header.module.css'
 import { LogoGoogle } from 'react-ionicons'
 import styled from 'styled-components'
 import theme from 'styles/theme'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 const Box = styled(motion.div)`
   margin: auto;
@@ -23,12 +23,11 @@ const Button = styled.a`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 `
 
 const ButtonText = styled.p`
   font-size: 25px;
-  color: ${theme.colors.buttonText  };
+  color: ${theme.colors.buttonText};
 `
 
 // The approach used in this component shows how to build a sign in and sign out
@@ -51,13 +50,12 @@ export default function SignInButton() {
         }}
       >
         <LogoGoogle
-          height='35px'
-          width='35px'
-          color='#ffffff'
-          style={{ padding: '10px' }} />
-        <ButtonText>
-          Sign In
-        </ButtonText>
+          height="35px"
+          width="35px"
+          color="#ffffff"
+          style={{ padding: '10px' }}
+        />
+        <ButtonText>Sign In</ButtonText>
       </Button>
       {/* {session?.user && (
           <>

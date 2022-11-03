@@ -8,18 +8,19 @@ import styled from 'styled-components'
 const MyCourses = styled.div``
 
 const Table = styled.table`
-    text-align: left;
-    // border: 1px solid white;
-    // border-collapse: collapse;
-    border-collapse: collapse;
-    th {
-        border-bottom: 1px solid white;
-        // border-radius: 15px;
-    }
-    th, td {
-        border-bottom: 1px solid white;
-        padding: 10px;
-      }
+  text-align: left;
+  // border: 1px solid white;
+  // border-collapse: collapse;
+  border-collapse: collapse;
+  th {
+    border-bottom: 1px solid white;
+    // border-radius: 15px;
+  }
+  th,
+  td {
+    border-bottom: 1px solid white;
+    padding: 10px;
+  }
 `
 
 export default function Stats() {
@@ -57,9 +58,7 @@ export default function Stats() {
     <Layout>
       <h1>Site Statistics</h1>
 
-      <h2>
-        Universities by Number of Pending Invitations
-      </h2>
+      <h2>Universities by Number of Pending Invitations</h2>
 
       <Table>
         <tr>
@@ -75,9 +74,7 @@ export default function Stats() {
         ))}
       </Table>
 
-      <h2>
-        Universities and Services by Number of Accepted Invitations
-      </h2>
+      <h2>Universities and Services by Number of Accepted Invitations</h2>
 
       <Table>
         <tr>

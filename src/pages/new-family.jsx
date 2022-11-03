@@ -1,7 +1,3 @@
 export default function NewFamily() {
-  return (
-    <>
-      New Family
-    </>
-  )
+  return <>New Family</>
 }

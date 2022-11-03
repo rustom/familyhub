@@ -8,8 +8,9 @@ export default async function handler(req, res) {
 
   const email = session.user.email
 
-  const query = 'select * from User left join University on User.universityID = University.universityID '
-    + (session.user.email && 'where email="' + email + '"')
+  const query =
+    'select * from User left join University on User.universityID = University.universityID ' +
+    (session.user.email && 'where email="' + email + '"')
 
   return endpointWrapper(req, res, query)
 }

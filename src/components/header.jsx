@@ -26,9 +26,7 @@ export default function Header() {
       </noscript>
       {!session && (
         <Box>
-          <span className={styles.notSignedInText}>
-            You are not signed in
-          </span>
+          <span className={styles.notSignedInText}>You are not signed in</span>
           <a
             href={`/api/auth/signin`}
             className={styles.buttonPrimary}

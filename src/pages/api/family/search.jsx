@@ -5,7 +5,6 @@
 // export default async function handler(req, res) {
 //     const session = await unstable_getServerSession(req, res, authOptions)
 
-
 //     if (session) {
 //         const connection = await mysql.createConnection({
 //             host: process.env.INSTANCE_HOST, // e.g. '127.0.0.1'

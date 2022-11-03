@@ -1,7 +1,7 @@
 import endpointWrapper from '../util'
 
 export default async function handler(req, res) {
-    const query = `select un.universityName, count(*) as numPending
+  const query = `select un.universityName, count(*) as numPending
     from University un
     natural join User us
     join Membership m
@@ -10,5 +10,5 @@ export default async function handler(req, res) {
     group by un.universityName
     order by numPending desc`
 
-    return endpointWrapper(req, res, query)
+  return endpointWrapper(req, res, query)
 }

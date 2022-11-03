@@ -19,7 +19,12 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log('heyyyy' + JSON.stringify(user) + JSON.stringify(account) + JSON.stringify(email))
+      console.log(
+        'heyyyy' +
+          JSON.stringify(user) +
+          JSON.stringify(account) +
+          JSON.stringify(email)
+      )
       const connection = await mysql.createConnection({
         host: process.env.INSTANCE_HOST, // e.g. '127.0.0.1'
         port: process.env.DB_PORT, // e.g. '3306'
@@ -36,10 +41,14 @@ export const authOptions = {
         return true
       }
 
-      console.log(user.name + ', ' + user.email);
+      console.log(user.name + ', ' + user.email)
 
-      const query = 'insert into User (userName, email) values ("'
-        + user.name + '", "' + user.email + '")'
+      const query =
+        'insert into User (userName, email) values ("' +
+        user.name +
+        '", "' +
+        user.email +
+        '")'
 
       console.log(query)
 
@@ -55,7 +64,7 @@ export const authOptions = {
     },
     async redirect({ url, baseUrl }) {
       return '/home'
-    }
+    },
   },
 }
 
