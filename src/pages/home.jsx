@@ -52,7 +52,7 @@ export default function Home() {
   // If session exists, display content
   return (
     <Layout>
-      <h1>Protected Page</h1>
+      <h1>Home Page</h1>
       <p>
         <strong>{JSON.stringify(userContent) ?? '\u00a0'}</strong>
       </p>
