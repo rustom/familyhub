@@ -22,7 +22,7 @@ const Table = styled.table`
   }
 `
 
-export default function FamilySearch() {
+export default function JoinFamily() {
   const { data: session } = useSession()
   const [universityData, setUniversityData] = useState()
   const [userContent, setUserContent] = useState()
