@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import styled from 'styled-components'
-import { unstable_renderSubtreeIntoContainer } from 'react-dom'
+
 
 const MyCourses = styled.div``
 
-export default function Home() {
+export default function UserSettings() {
   const { data: session } = useSession()
   const [universityData, setUniversityData] = useState()
   const [userContent, setUserContent] = useState()
