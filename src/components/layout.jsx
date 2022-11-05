@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import theme from 'styles/theme'
 import AccessDenied from './access-denied'
 import { useSession } from 'next-auth/react'
+import Navigation from './navigation'
 
 const Wrapper = styled.main`
   margin: 0;
@@ -54,7 +55,9 @@ export default function Layout({ children }) {
         {!session && <AccessDenied />}
         {session && (
           <ContentBox>
-            {children} <Header />
+            <Navigation />
+            {children} 
+            <Header />
           </ContentBox>
         )}
       </Wrapper>

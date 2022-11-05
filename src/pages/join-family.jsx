@@ -26,9 +26,9 @@ export default function JoinFamily() {
   const { data: session } = useSession()
   const [universityData, setUniversityData] = useState()
   const [userContent, setUserContent] = useState()
-  const [submitted, setSubmitted] = useState(0)
+  const [submitted, setSubmitted] = useState()
   const [leaderKeyword, setLeaderKeyword] = useState('')
-  const [subscriptionSerivces, setSubscriptionServices] = useState()
+  const [subscriptionServices, setSubscriptionServices] = useState()
   const [subscriptionService, setSubscriptionService] = useState()
   const [familyData, setFamilyData] = useState()
 
@@ -36,14 +36,14 @@ export default function JoinFamily() {
     const fetchData = async () => {
       const res = await fetch('/api/user/read')
       const json = await res.json()
-      console.log(JSON.stringify(json))
+      // console.log(JSON.stringify(json))
 
       setUserContent(json[0])
       setNewName(json[0].userName)
       setNewUniversityName(json[0].universityName)
     }
     fetchData()
-  }, [submitted])
+  }, [session])
 
 
 
@@ -58,18 +58,21 @@ export default function JoinFamily() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`/api/subscription-service/read`)
-      setSubscriptionServices(await res.json())
+      const json = await res.json()
+      setSubscriptionServices(json)
+      // setSubscriptionService(json[0].serviceName)
     }
     fetchData()
   }, [session])
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`/api/family/search?universityName=${universityName}&leaderKeyword=${leaderKeyword.toLowerCase()}&serviceName=${subscriptionService}`)
+      // if (subscriptionService)
+      const res = await fetch(`/api/family/search?universityName=${universityName}&leaderKeyword=${leaderKeyword.toLowerCase()}&serviceName=${subscriptionService || ''}`)
       setFamilyData(await res.json())
     }
     fetchData()
-  }, [submitted])
+  }, [subscriptionService, leaderKeyword])
 
   const [userName, setNewName] = useState('')
   const [universityName, setNewUniversityName] = useState('')
@@ -83,19 +86,22 @@ export default function JoinFamily() {
   // }
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
 
-    // const postData = async () => {
-    //   const res = await fetch('/api/user/update', {
-    //     method: 'PUT',
-    //     body: JSON.stringify({
-    //       userName: userName,
-    //       universityName: universityName,
-    //     }),
-    //   })
-    //   await res.json()
-    // }
-    // postData()
+    // console.log(event.target)
+    console.log(event)
+
+    const postData = async () => {
+      const res = await fetch('/api/membership/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          memberID: userContent.userID, 
+          familyID: event
+        }),
+      })
+      await res.json()
+    }
+    postData()
 
     // alert('Thanks for submitting! Your info should now be updated.')
     setSubmitted(submitted + 1)
@@ -109,36 +115,36 @@ export default function JoinFamily() {
       <p>Email: {userContent?.email}</p>
       <p>University: {userContent?.universityName}</p>
       <p>City: {userContent?.city}</p>
-      <form onSubmit={handleSubmit}>
-        <h2>
-          Input your family search settings below. You can input the subscription service type that you are looking for and/or a keyword search for the name of the leader of your family.
-        </h2>
-        <label>
-          {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
-          Subscription Serivce: {'  '}
-          <select
-            value={subscriptionService}
-            onChange={(e) => setSubscriptionService(e.target.value)}
-          >
-            <option value={''}></option>
-            {subscriptionSerivces?.map((row) => (
-              <option value={row.serviceName}>{row.serviceName}</option>
-            ))}
-          </select>
-        </label>
-        <br /> <br />
-        <label>
-          Leader name keyword:{'  '}
-          <input
-            type="text"
-            value={leaderKeyword}
-            onChange={(e) => setLeaderKeyword(e.target.value)}
-          />
-        </label>
-        <br /> <br />
+      {/* <form onSubmit={handleSubmit}> */}
+      <h2>
+        Input your family search settings below. You can input the subscription service type that you are looking for and/or a keyword search for the name of the leader of your family.
+      </h2>
+      <label>
+        {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
+        Subscription Serivce: {'  '}
+        <select
+          value={subscriptionService}
+          onChange={(e) => setSubscriptionService(e.target.value)}
+        >
+          {/* <option value={''}></option> */}
+          {subscriptionServices?.map((row) => (
+            <option value={row.serviceName}>{row.serviceName}</option>
+          ))}
+        </select>
+      </label>
+      <br /> <br />
+      <label>
+        Leader name keyword (optional):{'  '}
+        <input
+          type="text"
+          value={leaderKeyword}
+          onChange={(e) => setLeaderKeyword(e.target.value)}
+        />
+      </label>
+      <br /> <br />
 
-        <input type="submit" value="Submit" />
-      </form>
+      {/* <input type="submit" value="Submit" /> */}
+      {/* </form> */}
 
       <Table>
         <tr>
@@ -148,6 +154,7 @@ export default function JoinFamily() {
           <th>Access Type</th>
           <th>Current Members</th>
           <th>Max Members</th>
+          <th>Request to join</th>
         </tr>
         {
           familyData?.map((row) => (
@@ -159,6 +166,7 @@ export default function JoinFamily() {
               <td>{row.accessType}</td>
               <td>{row.numMembers}</td>
               <td>{row.maxMembers}</td>
+              <td>{row.accessType === 'Open' && <button id={row.familyID} onClick={() => handleSubmit(row.familyID)}>Request</button>}</td>
             </tr>
 
             // { pendingUsersContent?.map((row) => (

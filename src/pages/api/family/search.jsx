@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   and subq.numMembers < s.maxMembers
   `.replace('/[\r\n]/gm', ' ')
 
-  console.log(query)
+  // console.log(query)
 
   return endpointWrapper(req, res, query)
 }
