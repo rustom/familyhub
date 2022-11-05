@@ -135,7 +135,7 @@ export default function NewFamily() {
 
       <form onSubmit={handleSubmit}>
         <h2>
-          Enter the family details below:
+          Here, you can create a new family that other users can join. Select which subscription service your family is for and whether you'd like your group to be open or closed. 
         </h2>
         <label>
           {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
