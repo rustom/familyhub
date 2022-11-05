@@ -132,13 +132,6 @@ export default function NewFamily() {
   return (
     <Layout>
       <h1>New Family</h1>
-      <p>
-        <strong>{JSON.stringify(userContent) ?? '\u00a0'}</strong>
-      </p>
-      <p>Name: {userContent?.userName}</p>
-      <p>Email: {userContent?.email}</p>
-      <p>University: {userContent?.universityName}</p>
-      <p>City: {userContent?.city}</p>
 
       <form onSubmit={handleSubmit}>
         <h2>

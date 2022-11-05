@@ -111,11 +111,7 @@ export default function JoinFamily() {
   return (
     <Layout>
       <h1>Family Search</h1>
-      <p>Name: {userContent?.userName}</p>
-      <p>Email: {userContent?.email}</p>
-      <p>University: {userContent?.universityName}</p>
-      <p>City: {userContent?.city}</p>
-      {/* <form onSubmit={handleSubmit}> */}
+
       <h2>
         Input your family search settings below. You can input the subscription service type that you are looking for and/or a keyword search for the name of the leader of your family.
       </h2>

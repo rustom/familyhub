@@ -75,9 +75,6 @@ export default function Home() {
   const handleLeave = (event, isLeader) => {
     // event.preventDefault()
 
-    // console.log(event.target)
-    // console.log(event + )
-
     if (isLeader) {
       // const postData = async () => {
       //   const res = await fetch('/api/family/delete', {
@@ -114,9 +111,6 @@ export default function Home() {
   return (
     <Layout>
       <h1>Home Page</h1>
-      <p>
-        <strong>{JSON.stringify(userContent) ?? '\u00a0'}</strong>
-      </p>
       <p>Name: {userContent?.userName}</p>
       <p>Email: {userContent?.email}</p>
       <p>University: {userContent?.universityName}</p>
@@ -160,11 +154,6 @@ export default function Home() {
           ))
         }
       </Table>
-
-      <Button link={'/new-family'} title={'New Family'} />
-      <Button link={'/join-family'} title={'Join Family'} />
-      <Button link={'/stats'} title={'Site Statistics'} />
-      <Button link={'/user-settings'} title={'User Settings'} />
       {/* 
       <MyCourses>
 
