@@ -122,7 +122,7 @@ export default function Home() {
         <Heading>
           Current Families
         </Heading>
-        <Table>
+        <Table variant='striped'>
           <Thead>
             <Tr>
               <Th>Family ID</Th>

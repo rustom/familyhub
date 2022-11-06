@@ -50,7 +50,7 @@ export default function Layout({ children }) {
   const { data: session } = useSession()
 
   return (
-    <Flex height='100vh' flex-direction='column' justifyContent='flex-start' alignItems='flex-start'>
+    <Flex height='100vh' flex-direction='column' justifyContent='flex-start' alignItems='flex-between'>
       {/* <Wrapper> */}
       {/* <Center> */}
       {!session && <AccessDenied />}
@@ -67,8 +67,7 @@ export default function Layout({ children }) {
           <Header />
         </Container>
       )}
-      {/* </Wrapper> */}
-      {/* </Center> */}
+
     </Flex>
   )
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import styled from 'styled-components'
+import { Heading, Text, FormControl, Input, Select, FormLabel, Button } from '@chakra-ui/react'
 
 
 const MyCourses = styled.div``
@@ -39,14 +40,6 @@ export default function UserSettings() {
   const [userName, setNewName] = useState('')
   const [universityName, setNewUniversityName] = useState('')
 
-  // const handleChange = (event) => {
-  //   const name = event.target.name;
-
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // }
-
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -69,29 +62,27 @@ export default function UserSettings() {
   // If session exists, display content
   return (
     <Layout>
-      <h1>User Settings</h1>
-      <p>Name: {userContent?.userName}</p>
-      <p>Email: {userContent?.email}</p>
-      <p>University: {userContent?.universityName}</p>
-      <p>City: {userContent?.city}</p>
-      <form onSubmit={handleSubmit}>
-        <h2>
-          Change your settings below. Your email cannot be changed because it is
-          linked to your sign in.
-        </h2>
-        <label>
-          Name:{'  '}
-          <input
+      <Heading>User Settings</Heading>
+      <Text>
+        Change your settings below. Your email cannot be changed because it is
+        linked to your sign in.
+      </Text>
+      <FormControl onSubmit={handleSubmit}>
+        <Text>
+          Name:
+        </Text>
+        <FormLabel>
+          <Input
             type="text"
             value={userName}
             onChange={(e) => setNewName(e.target.value)}
           />
-        </label>
-        <br /> <br />
-        <label>
+        </FormLabel>
+        <br />
+        <FormLabel>
           {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
           University: {'  '}
-          <select
+          <Select
             value={universityName}
             onChange={(e) => setNewUniversityName(e.target.value)}
           >
@@ -99,11 +90,11 @@ export default function UserSettings() {
             {universityData?.map((row) => (
               <option value={row.universityName}>{row.universityName}</option>
             ))}
-          </select>
-        </label>
-        <br /> <br />
-        <input type="submit" value="Submit" />
-      </form>
+          </Select>
+        </FormLabel>
+        <br />
+        <Button onClick={handleSubmit}>Submit</Button>
+      </FormControl>
       {/* 
       <MyCourses>
 

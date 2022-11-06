@@ -4,24 +4,7 @@ import Layout from 'components/layout'
 import AccessDenied from '../components/access-denied'
 import Button from 'components/button'
 import styled from 'styled-components'
-
-const MyCourses = styled.div``
-
-const Table = styled.table`
-  text-align: left;
-  // border: 1px solid white;
-  // border-collapse: collapse;
-  border-collapse: collapse;
-  th {
-    border-bottom: 1px solid white;
-    // border-radius: 15px;
-  }
-  th,
-  td {
-    border-bottom: 1px solid white;
-    padding: 10px;
-  }
-`
+import { Heading, Table, Tr, Th, Tbody, Thead, Td } from '@chakra-ui/react'
 
 export default function Stats() {
   const { data: session } = useSession()
@@ -56,40 +39,48 @@ export default function Stats() {
 
   return (
     <Layout>
-      <h1>Site Statistics</h1>
+      <Heading>Site Statistics</Heading>
 
-      <h2>Universities by Number of Pending Invitations</h2>
+      <Heading size='md'>Universities by Number of Pending Invitations</Heading>
 
-      <Table>
-        <tr>
-          <th>University Name</th>
-          <th>Number of Pending Invitations</th>
-        </tr>
+      <Table variant='striped'>
+        <Thead>
+          <Tr>
+            <Th>University Name</Th>
+            <Th>Number of Pending Invitations</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
 
-        {pendingUsersContent?.map((row) => (
-          <tr>
-            <td>{row.universityName}</td>
-            <td>{row.numPending}</td>
-          </tr>
-        ))}
+          {pendingUsersContent?.map((row) => (
+            <Tr>
+              <Td>{row.universityName}</Td>
+              <Td>{row.numPending}</Td>
+            </Tr>
+          ))}
+        </Tbody>
       </Table>
+      <br /> <br />
+      <Heading size='md'>Universities and Services by Number of Accepted Invitations</Heading>
 
-      <h2>Universities and Services by Number of Accepted Invitations</h2>
+      <Table variant='striped'>
+        <Thead>
+          <Tr>
+            <Th>University Name</Th>
+            <Th>Number of Pending Invitations</Th>
+            <Th>Number of Accepted Invitations</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
 
-      <Table>
-        <tr>
-          <th>University Name</th>
-          <th>Number of Pending Invitations</th>
-          <th>Number of Accepted Invitations</th>
-        </tr>
-
-        {acceptedUsersContent?.map((row) => (
-          <tr>
-            <td>{row.universityName}</td>
-            <td>{row.serviceName}</td>
-            <td>{row.numUsers}</td>
-          </tr>
-        ))}
+          {acceptedUsersContent?.map((row) => (
+            <Tr>
+              <Td>{row.universityName}</Td>
+              <Td>{row.serviceName}</Td>
+              <Td>{row.numUsers}</Td>
+            </Tr>
+          ))}
+        </Tbody>
       </Table>
     </Layout>
   )

@@ -105,31 +105,6 @@ export default function NewFamily() {
     alert('Thank you! Your input has been added.')
   }
 
-  // const handleSubmit = (event) => {
-  //   // event.preventDefault()
-
-  //   // console.log(event.target)
-  //   // console.log(event)
-
-  //   // const postData = async () => {
-  //   //   const res = await fetch('/api/family/create', {
-  //   //     method: 'POST',
-  //   //     body: JSON.stringify({
-  //   //       leaderID: userContent.userID,
-  //   //       accessType: accessType, 
-  //   //       serviceName: subscriptionService
-  //   //     }),
-  //   //   })
-  //   //   await res.json()
-  //   // }
-  //   // postData()
-  //   // alert('Thanks for submitting! Your info should now be updated.')
-
-  //   // setSubmitted(submitted + 1)
-  //   submit();
-  // }
-
-  // If session exists, display content
   return (
     <Layout>
       <Heading>New Family</Heading>
@@ -164,7 +139,7 @@ export default function NewFamily() {
           </Select>
         </FormLabel>
         <br /> <br />
-        <Button onClick={submit} >Submit</Button>
+        <Button onClick={submit}>Submit</Button>
       </FormControl>
       {/* 
       <MyCourses>

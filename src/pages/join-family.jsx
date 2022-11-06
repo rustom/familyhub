@@ -108,7 +108,7 @@ export default function JoinFamily() {
       {/* <input type="submit" value="Submit" /> */}
       {/* </form> */}
 
-      <Table>
+      <Table variant='striped'>
         <Thead>
           <Tr>
             <Th>Family ID</Th>
