@@ -1,18 +1,31 @@
 import { SessionProvider } from 'next-auth/react'
-// import './styles.css'
+import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
 
-import { AppProps } from 'next/app'
-import { Session } from 'next-auth'
+// const colors = {
+//   brand: {
+//     900: '#1a365d',
+//     800: '#153e75',
+//     700: '#2a69ac',
+//   },
+// }
 
-// Use of the <SessionProvider> is mandatory to allow components that call
-// `useSession()` anywhere in your application to access the `session` object.
+const config = {
+  initialColorMode: 'Dark',
+  useSystemColorMode: false,
+}
+
+const theme = extendTheme({ config })
+
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <ChakraProvider theme={theme}>
+          <Component {...pageProps} />
+      </ChakraProvider>
     </SessionProvider>
   )
 }

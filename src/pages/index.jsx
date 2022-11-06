@@ -1,8 +1,9 @@
 import Layout from '../components/layout'
 import styled from 'styled-components'
-import GlobalStyle from 'styles/global-style'
 import theme from 'styles/theme'
 import SignInButton from 'components/sign-in-button'
+import { Flex, Heading, useColorMode, Button, Text, Center, Container, VStack, Link } from '@chakra-ui/react'
+import { signIn } from 'next-auth/react'
 
 const Background = styled.div`
   margin: 0;
@@ -45,49 +46,69 @@ const Box = styled.div`
   max-width: 800px;
 `
 
-const Title = styled.h1`
-  font-size: 80px;
-`
+// const Title = styled.h1`
+//   font-size: 80px;
+// `
 
-const Text = styled.p`
-  font-size: 20px;
-`
-
-const Link = styled.a``
+// const Text = styled.p`
+//   font-size: 20px;
+// `
 
 export default function IndexPage() {
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <>
-      <GlobalStyle />
-      <Background>
-        <Box>
-          <Title>Welcome to FamilyHub!</Title>
-          <Text>
-            Thank you for visiting our CS 411 project! FamilyHub is an online
-            service that connects university students who hate overpaying for
-            individual streaming services. With FamilyHub, students can create
-            or join family plans that reduce the cost of streaming services for
-            all members.
-          </Text>
-          <Text>
-            Please note that in its current state, your email must be
-            whitelisted to access our site. If you are unable to login, please
-            contact{' '}
-            <a
-              href={
-                'mailto:rustomi2@illinois.edu?subject=A personalized, funny message for Rustom Ichhaporia'
-              }
-              aria-label="Email Link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Rustom Ichhaporia
-            </a>
-            .
-          </Text>
-          <SignInButton />
-        </Box>
-      </Background>
-    </>
+    <Flex height='100vh' alignItems='center' justifyContent='center'>
+      <Center>
+        {/* <Flex direction='column'> */}
+        <VStack spacing={10}>
+          <Heading size='4xl'>
+            Welcome to FamilyHub!
+          </Heading>
+          <Container maxW='600px'>
+            <Text>
+              Thank you for visiting our CS 411 project! FamilyHub is an online
+              service that connects university students who hate overpaying for
+              individual streaming services. With FamilyHub, students can create
+              or join family plans that reduce the cost of streaming services for
+              all members.
+            </Text>
+          </Container>
+          <Button onClick={() => signIn('google')}>
+            Log in
+          </Button>
+        </VStack>
+      </Center>
+    </Flex>
+    // <>
+    //   <Background>
+    //     <Box>
+    //       <Title>Welcome to FamilyHub!</Title>
+    //       <Text>
+    //         Thank you for visiting our CS 411 project! FamilyHub is an online
+    //         service that connects university students who hate overpaying for
+    //         individual streaming services. With FamilyHub, students can create
+    //         or join family plans that reduce the cost of streaming services for
+    //         all members.
+    //       </Text>
+    //       <Text>
+    //         Please note that in its current state, your email must be
+    //         whitelisted to access our site. If you are unable to login, please
+    //         contact{' '}
+    //         <a
+    //           href={
+    //             'mailto:rustomi2@illinois.edu?subject=A personalized, funny message for Rustom Ichhaporia'
+    //           }
+    //           aria-label="Email Link"
+    //           target="_blank"
+    //           rel="noopener noreferrer"
+    //         >
+    //           Rustom Ichhaporia
+    //         </a>
+    //         .
+    //       </Text>
+    //       <SignInButton />
+    //     </Box>
+    //   </Background>
+    // </>
   )
 }

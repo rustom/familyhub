@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import AccessDenied from '../components/access-denied'
-import Button from 'components/button'
 import styled from 'styled-components'
-import Navigation from 'components/navigation'
+import { FormControl, Heading, Text, FormLabel, Select, Button } from '@chakra-ui/react'
 
 const MyCourses = styled.div``
 
@@ -102,68 +101,71 @@ export default function NewFamily() {
       // await res.json()
     }
     postData()
+
+    alert('Thank you! Your input has been added.')
   }
 
-  const handleSubmit = (event) => {
-    // event.preventDefault()
+  // const handleSubmit = (event) => {
+  //   // event.preventDefault()
 
-    // console.log(event.target)
-    // console.log(event)
+  //   // console.log(event.target)
+  //   // console.log(event)
 
-    // const postData = async () => {
-    //   const res = await fetch('/api/family/create', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       leaderID: userContent.userID,
-    //       accessType: accessType, 
-    //       serviceName: subscriptionService
-    //     }),
-    //   })
-    //   await res.json()
-    // }
-    // postData()
-    // alert('Thanks for submitting! Your info should now be updated.')
+  //   // const postData = async () => {
+  //   //   const res = await fetch('/api/family/create', {
+  //   //     method: 'POST',
+  //   //     body: JSON.stringify({
+  //   //       leaderID: userContent.userID,
+  //   //       accessType: accessType, 
+  //   //       serviceName: subscriptionService
+  //   //     }),
+  //   //   })
+  //   //   await res.json()
+  //   // }
+  //   // postData()
+  //   // alert('Thanks for submitting! Your info should now be updated.')
 
-    // setSubmitted(submitted + 1)
-    submit();
-  }
+  //   // setSubmitted(submitted + 1)
+  //   submit();
+  // }
 
   // If session exists, display content
   return (
     <Layout>
-      <h1>New Family</h1>
+      <Heading>New Family</Heading>
 
-      <form onSubmit={handleSubmit}>
-        <h2>
-          Here, you can create a new family that other users can join. Select which subscription service your family is for and whether you'd like your group to be open or closed. 
-        </h2>
-        <label>
+      <Text>
+        Here, you can create a new family that other users can join. Select which subscription service your family is for and whether you'd like your group to be open or closed.
+      </Text>
+
+      <FormControl onSubmit={submit}>
+        <FormLabel>
           {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
           Subscription Serivce: {'  '}
-          <select
-            value={subscriptionService}
-            onChange={(e) => setSubscriptionService(e.target.value)}
-          >
-            {/* <option value={''}></option> */}
-            {subscriptionServices?.map((row) => (
-              <option value={row.serviceName}>{row.serviceName}</option>
-            ))}
-          </select>
-        </label>
+        </FormLabel>
+        <Select
+          value={subscriptionService}
+          onChange={(e) => setSubscriptionService(e.target.value)}
+        >
+          {/* <option value={''}></option> */}
+          {subscriptionServices?.map((row) => (
+            <option value={row.serviceName}>{row.serviceName}</option>
+          ))}
+        </Select>
         <br /> <br />
-        <label>
+        <FormLabel>
           Access Type: {'  '}
-          <select
+          <Select
             value={accessType}
             onChange={(e) => setAccessType(e.target.value)}
           >
             <option value="Open">Open</option>
             <option value="Closed">Closed</option>
-          </select>
-        </label>
+          </Select>
+        </FormLabel>
         <br /> <br />
-        <input type="submit" value="Submit" />
-      </form>
+        <Button onClick={submit} >Submit</Button>
+      </FormControl>
       {/* 
       <MyCourses>
 

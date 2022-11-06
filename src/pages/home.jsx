@@ -2,26 +2,27 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import AccessDenied from '../components/access-denied'
-import Button from 'components/button'
+// import Button from 'components/button'
 import styled from 'styled-components'
+import { Heading, Text, VStack, Button, Table, Thead, Tbody, Tr, Td, Th, Divider } from '@chakra-ui/react'
 
 const MyCourses = styled.div``
 
-const Table = styled.table`
-  text-align: left;
-  // border: 1px solid white;
-  // border-collapse: collapse;
-  border-collapse: collapse;
-  th {
-    border-bottom: 1px solid white;
-    // border-radius: 15px;
-  }
-  th,
-  td {
-    border-bottom: 1px solid white;
-    padding: 10px;
-  }
-`
+// const Table = styled.table`
+//   text-align: left;
+//   // border: 1px solid white;
+//   // border-collapse: collapse;
+//   border-collapse: collapse;
+//   th {
+//     border-bottom: 1px solid white;
+//     // border-radius: 15px;
+//   }
+//   th,
+//   Td {
+//     border-bottom: 1px solid white;
+//     padding: 10px;
+//   }
+// `
 
 export default function Home() {
   const { data: session } = useSession()
@@ -73,10 +74,10 @@ export default function Home() {
   // }, [session])
 
   const handleLeave = (event, isLeader) => {
-    // event.preventDefault()
+    // event.prevenTdefault()
 
     if (isLeader) {
-      // const postData = async () => {
+      // const posTdata = async () => {
       //   const res = await fetch('/api/family/delete', {
       //     method: 'DELETE',
       //     body: JSON.stringify({
@@ -86,7 +87,7 @@ export default function Home() {
       //   })
       //   await res.json()
       // }
-      // postData()
+      // posTdata()
       alert(`Unfortunately, you currently can't leave a family if you are the leader.`)
     } else {
       const postData = async () => {
@@ -110,50 +111,44 @@ export default function Home() {
   // If session exists, display content
   return (
     <Layout>
-      <h1>Home Page</h1>
-      <p>Name: {userContent?.userName}</p>
-      <p>Email: {userContent?.email}</p>
-      <p>University: {userContent?.universityName}</p>
-      <p>City: {userContent?.city}</p>
+        <Heading>Home Page</Heading>
+        <Text>Name: {userContent?.userName}</Text>
+        <Text>Email: {userContent?.email}</Text>
+        <Text>University: {userContent?.universityName}</Text>
+        <Text>City: {userContent?.city}</Text>
 
-      {/* <div><p>Hello! </p>{familyData?.map((row) => <p>{JSON.stringify(row)}</p>)}</div> */}
-      <h2>
-        Current Families
-      </h2>
-      <Table>
-        <tr>
-          <th>Family ID</th>
-          <th>Subscription Service</th>
-          <th>Leader</th>
-          <th>Access Type</th>
-          <th>Current Members</th>
-          <th>Max Members</th>
-          <th>Leave Family</th>
-        </tr>
-        {
-          familyData?.map((row) => (
-            row.familyID &&
-            <tr>
-              {/* <td>{JSON.stringify(row)}</td> */}
-              <td>{row.familyID}</td>
-              <td>{row.serviceName}</td>
-              <td>{row.leaderName && row.leaderName === userContent.userName ? 'Yes' : 'No'}</td>
-              <td>{row.accessType}</td>
-              <td>{row.numMembers}</td>
-              <td>{row.maxMembers}</td>
-              <td>{row.accessType === 'Open' && <button id={row.familyID} onClick={() => handleLeave(row.familyID, row.leaderName === userContent.userName ? true : false)}>Leave</button>}</td>
-            </tr>
+        <Divider />
 
-
-            // { pendingUsersContent?.map((row) => (
-            //   <tr>
-            //     <td>{row.universityName}</td>
-            //     <td>{row.numPending}</td>
-            //   </tr>
-            // ))}
-          ))
-        }
-      </Table>
+        <Heading>
+          Current Families
+        </Heading>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>Family ID</Th>
+              <Th>Subscription Service</Th>
+              <Th>Leader</Th>
+              <Th>Access Type</Th>
+              <Th>Current Members</Th>
+              <Th>Max Members</Th>
+              <Th>Leave Family</Th>
+            </Tr>
+          </Thead>
+          {
+            familyData?.map((row) => (
+              row.familyID &&
+              <Tr>
+                <Td>{row.familyID}</Td>
+                <Td>{row.serviceName}</Td>
+                <Td>{row.leaderName && row.leaderName === userContent.userName ? 'Yes' : 'No'}</Td>
+                <Td>{row.accessType}</Td>
+                <Td>{row.numMembers}</Td>
+                <Td>{row.maxMembers}</Td>
+                <Td>{row.accessType === 'Open' && <Button id={row.familyID} onClick={() => handleLeave(row.familyID, row.leaderName === userContent.userName ? true : false)}>Leave</Button>}</Td>
+              </Tr>
+            ))
+          }
+        </Table>
       {/* 
       <MyCourses>
 

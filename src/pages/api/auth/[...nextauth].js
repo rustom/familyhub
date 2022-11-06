@@ -19,12 +19,6 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log(
-        'heyyyy' +
-          JSON.stringify(user) +
-          JSON.stringify(account) +
-          JSON.stringify(email)
-      )
       const connection = await mysql.createConnection({
         host: process.env.INSTANCE_HOST, // e.g. '127.0.0.1'
         port: process.env.DB_PORT, // e.g. '3306'
