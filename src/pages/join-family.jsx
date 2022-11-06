@@ -2,25 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import styled from 'styled-components'
-
-
-const MyCourses = styled.div``
-
-const Table = styled.table`
-  text-align: left;
-  // border: 1px solid white;
-  // border-collapse: collapse;
-  border-collapse: collapse;
-  th {
-    border-bottom: 1px solid white;
-    // border-radius: 15px;
-  }
-  th,
-  td {
-    border-bottom: 1px solid white;
-    padding: 10px;
-  }
-`
+import { FormControl, Heading, Text, FormLabel, Select, Button, Input, Table, Thead, Tbody, Tr, Td, Th, Divider } from '@chakra-ui/react'
 
 export default function JoinFamily() {
   const { data: session } = useSession()
@@ -31,6 +13,10 @@ export default function JoinFamily() {
   const [subscriptionServices, setSubscriptionServices] = useState()
   const [subscriptionService, setSubscriptionService] = useState()
   const [familyData, setFamilyData] = useState()
+
+  const [userName, setNewName] = useState('')
+  const [universityName, setNewUniversityName] = useState('')
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,8 +31,6 @@ export default function JoinFamily() {
     fetchData()
   }, [session])
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch('/api/university/read')
@@ -60,7 +44,7 @@ export default function JoinFamily() {
       const res = await fetch(`/api/subscription-service/read`)
       const json = await res.json()
       setSubscriptionServices(json)
-      // setSubscriptionService(json[0].serviceName)
+      setSubscriptionService(json[0].serviceName)
     }
     fetchData()
   }, [session])
@@ -68,34 +52,20 @@ export default function JoinFamily() {
   useEffect(() => {
     const fetchData = async () => {
       // if (subscriptionService)
-      const res = await fetch(`/api/family/search?universityName=${universityName}&leaderKeyword=${leaderKeyword.toLowerCase()}&serviceName=${subscriptionService || ''}`)
+      const res = await fetch(`/api/family/search?universityName=${universityName}&leaderKeyword=${leaderKeyword.toLowerCase()}&serviceName=${encodeURIComponent(subscriptionService || '')}`)
       setFamilyData(await res.json())
     }
     fetchData()
-  }, [subscriptionService, leaderKeyword])
-
-  const [userName, setNewName] = useState('')
-  const [universityName, setNewUniversityName] = useState('')
-
-  // const handleChange = (event) => {
-  //   const name = event.target.name;
-
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // }
+  }, [universityName, subscriptionService, leaderKeyword])
 
   const handleSubmit = (event) => {
-    // event.preventDefault()
-
-    // console.log(event.target)
     console.log(event)
 
     const postData = async () => {
       const res = await fetch('/api/membership/create', {
         method: 'POST',
         body: JSON.stringify({
-          memberID: userContent.userID, 
+          memberID: userContent.userID,
           familyID: event
         }),
       })
@@ -103,22 +73,22 @@ export default function JoinFamily() {
     }
     postData()
 
-    // alert('Thanks for submitting! Your info should now be updated.')
+    alert('Thanks for submitting! Your info should now be updated.')
     setSubmitted(submitted + 1)
   }
 
   // If session exists, display content
   return (
     <Layout>
-      <h1>Family Search</h1>
+      <Heading>Family Search</Heading>
 
-      <h2>
+      <Text>
         Input your family search settings below. You can input the subscription service type that you are looking for and/or a keyword search for the name of the leader of your family.
-      </h2>
-      <label>
+      </Text>
+      <FormLabel>
         {/* <input type="text" value={newUniversityName} onChange={(e) => setNewUniversityName(e.target.value)} /> */}
         Subscription Serivce: {'  '}
-        <select
+        <Select
           value={subscriptionService}
           onChange={(e) => setSubscriptionService(e.target.value)}
         >
@@ -126,59 +96,49 @@ export default function JoinFamily() {
           {subscriptionServices?.map((row) => (
             <option value={row.serviceName}>{row.serviceName}</option>
           ))}
-        </select>
-      </label>
+        </Select>
+      </FormLabel>
       <br /> <br />
-      <label>
+      <FormLabel>
         Leader name keyword (optional):{'  '}
-        <input
-          type="text"
-          value={leaderKeyword}
-          onChange={(e) => setLeaderKeyword(e.target.value)}
-        />
-      </label>
+        <Input value={leaderKeyword} onChange={(e) => setLeaderKeyword(e.target.value)} />
+      </FormLabel>
       <br /> <br />
 
       {/* <input type="submit" value="Submit" /> */}
       {/* </form> */}
 
       <Table>
-        <tr>
-          <th>Family ID</th>
-          <th>Subscription Service</th>
-          <th>Leader Name</th>
-          <th>Access Type</th>
-          <th>Current Members</th>
-          <th>Max Members</th>
-          <th>Request to join</th>
-        </tr>
-        {
-          familyData?.map((row) => (
-            <tr>
-              {/* <td>{JSON.stringify(row)}</td> */}
-              <td>{row.familyID}</td>
-              <td>{row.serviceName}</td>
-              <td>{row.leaderName}</td>
-              <td>{row.accessType}</td>
-              <td>{row.numMembers}</td>
-              <td>{row.maxMembers}</td>
-              <td>{row.accessType === 'Open' && <button id={row.familyID} onClick={() => handleSubmit(row.familyID)}>Request</button>}</td>
-            </tr>
+        <Thead>
+          <Tr>
+            <Th>Family ID</Th>
+            <Th>Subscription Service</Th>
+            <Th>Leader Name</Th>
+            <Th>Access Type</Th>
+            <Th>Current Members</Th>
+            <Th>Max Members</Th>
+            <Th>Request to join</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
 
-            // { pendingUsersContent?.map((row) => (
-            //   <tr>
-            //     <td>{row.universityName}</td>
-            //     <td>{row.numPending}</td>
-            //   </tr>
-            // ))}
-          ))
-        }
+          {
+          familyData?.map((row) => (
+            row.familyID && 
+            <Tr>
+              <Td>{row.familyID}</Td>
+              <Td>{row.serviceName}</Td>
+              <Td>{row.leaderName}</Td>
+              <Td>{row.accessType}</Td>
+              <Td>{row.numMembers}</Td>
+              <Td>{row.maxMembers}</Td>
+              <Td>{row.accessType === 'Open' && <Button id={row.familyID} onClick={() => handleSubmit(row.familyID)}>Request</Button>}
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
       </Table>
 
-      {/* 
-      <MyCourses>
-
-      </MyCourses> */}
     </Layout>
   )
 }

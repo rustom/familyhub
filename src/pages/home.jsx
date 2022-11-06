@@ -134,6 +134,7 @@ export default function Home() {
               <Th>Leave Family</Th>
             </Tr>
           </Thead>
+          <Tbody>
           {
             familyData?.map((row) => (
               row.familyID &&
@@ -148,6 +149,7 @@ export default function Home() {
               </Tr>
             ))
           }
+          </Tbody>
         </Table>
       {/* 
       <MyCourses>
