@@ -21,8 +21,7 @@ export default async function handler(req, res) {
     where mem.memberStatus = 'Accepted'
     group by fa.familyID
   ) subq on subq.familyID = f.familyID
-  where u.universityName = '${req.query.universityName}'
-  and lower(us.userName) like '%${req.query.leaderKeyword}%'
+  where lower(us.userName) like '%${req.query.leaderKeyword}%'
   and f.serviceName like '%${req.query.serviceName}%'
   and subq.numMembers < s.maxMembers
   `.replace('/[\r\n]/gm', ' ')
