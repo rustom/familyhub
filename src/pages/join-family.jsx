@@ -99,14 +99,14 @@ export default function JoinFamily() {
     console.log(serviceName)
 
     const postData = async () => {
-      const res = await fetch('/api/membership/auto-join', {
+      const res = await fetch('/api/examples/auto-join', {
         method: 'POST',
         body: JSON.stringify({
           memberID: userContent.userID,
           serviceName: serviceName,
         }),
       })
-      await res.json()
+      // await res.json()
     }
     postData()
 
