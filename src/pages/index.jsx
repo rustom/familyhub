@@ -2,7 +2,17 @@ import Layout from '../components/layout'
 import styled from 'styled-components'
 import theme from 'styles/theme'
 import SignInButton from 'components/sign-in-button'
-import { Flex, Heading, useColorMode, Button, Text, Center, Container, VStack, Link } from '@chakra-ui/react'
+import {
+  Flex,
+  Heading,
+  useColorMode,
+  Button,
+  Text,
+  Center,
+  Container,
+  VStack,
+  Link,
+} from '@chakra-ui/react'
 import { signIn } from 'next-auth/react'
 
 const Background = styled.div`
@@ -57,25 +67,21 @@ const Box = styled.div`
 export default function IndexPage() {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <Flex height='100vh' alignItems='center' justifyContent='center'>
+    <Flex height="100vh" alignItems="center" justifyContent="center">
       <Center>
         {/* <Flex direction='column'> */}
         <VStack spacing={10}>
-          <Heading size='4xl'>
-            Welcome to FamilyHub!
-          </Heading>
-          <Container maxW='600px'>
+          <Heading size="4xl">Welcome to FamilyHub!</Heading>
+          <Container maxW="600px">
             <Text>
               Thank you for visiting our CS 411 project! FamilyHub is an online
               service that connects university students who hate overpaying for
               individual streaming services. With FamilyHub, students can create
-              or join family plans that reduce the cost of streaming services for
-              all members.
+              or join family plans that reduce the cost of streaming services
+              for all members.
             </Text>
           </Container>
-          <Button onClick={() => signIn('google')}>
-            Log in
-          </Button>
+          <Button onClick={() => signIn('google')}>Log in</Button>
         </VStack>
       </Center>
     </Flex>

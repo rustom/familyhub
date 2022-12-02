@@ -4,7 +4,19 @@ import Layout from 'components/layout'
 import AccessDenied from '../components/access-denied'
 // import Button from 'components/button'
 import styled from 'styled-components'
-import { Heading, Text, VStack, Button, Table, Thead, Tbody, Tr, Td, Th, Divider } from '@chakra-ui/react'
+import {
+  Heading,
+  Text,
+  VStack,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  Th,
+  Divider,
+} from '@chakra-ui/react'
 
 const MyCourses = styled.div``
 
@@ -88,14 +100,16 @@ export default function Home() {
       //   await res.json()
       // }
       // posTdata()
-      alert(`Unfortunately, you currently can't leave a family if you are the leader.`)
+      alert(
+        `Unfortunately, you currently can't leave a family if you are the leader.`
+      )
     } else {
       const postData = async () => {
         const res = await fetch('/api/membership/delete', {
           method: 'DELETE',
           body: JSON.stringify({
             memberID: userContent.userID,
-            familyID: event
+            familyID: event,
           }),
         })
         await res.json()
@@ -104,53 +118,70 @@ export default function Home() {
       alert('Thanks for submitting! Your info should now be updated.')
     }
 
-
     setSubmitted(submitted + 1)
   }
 
   // If session exists, display content
   return (
     <Layout>
-        <Heading>Home Page</Heading>
-        <Text>Name: {userContent?.userName}</Text>
-        <Text>Email: {userContent?.email}</Text>
-        <Text>University: {userContent?.universityName}</Text>
-        <Text>City: {userContent?.city}</Text>
+      <Heading>Home Page</Heading>
+      <Text>Name: {userContent?.userName}</Text>
+      <Text>Email: {userContent?.email}</Text>
+      <Text>University: {userContent?.universityName}</Text>
+      <Text>City: {userContent?.city}</Text>
 
-        <Divider />
+      <Divider />
 
-        <Heading>
-          Current Families
-        </Heading>
-        <Table variant='striped'>
-          <Thead>
-            <Tr>
-              <Th>Family ID</Th>
-              <Th>Subscription Service</Th>
-              <Th>Leader</Th>
-              <Th>Access Type</Th>
-              <Th>Current Members</Th>
-              <Th>Max Members</Th>
-              <Th>Leave Family</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-          {
-            familyData?.map((row) => (
-              row.familyID &&
-              <Tr>
-                <Td>{row.familyID}</Td>
-                <Td>{row.serviceName}</Td>
-                <Td>{row.leaderName && row.leaderName === userContent.userName ? 'Yes' : 'No'}</Td>
-                <Td>{row.accessType}</Td>
-                <Td>{row.numMembers}</Td>
-                <Td>{row.maxMembers}</Td>
-                <Td>{row.accessType === 'Open' && <Button id={row.familyID} onClick={() => handleLeave(row.familyID, row.leaderName === userContent.userName ? true : false)}>Leave</Button>}</Td>
-              </Tr>
-            ))
-          }
-          </Tbody>
-        </Table>
+      <Heading>Current Families</Heading>
+      <Table variant="striped">
+        <Thead>
+          <Tr>
+            <Th>Family ID</Th>
+            <Th>Subscription Service</Th>
+            <Th>Leader</Th>
+            <Th>Access Type</Th>
+            <Th>Current Members</Th>
+            <Th>Max Members</Th>
+            <Th>Leave Family</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {familyData?.map(
+            (row) =>
+              row.familyID && (
+                <Tr>
+                  <Td>{row.familyID}</Td>
+                  <Td>{row.serviceName}</Td>
+                  <Td>
+                    {row.leaderName && row.leaderName === userContent.userName
+                      ? 'Yes'
+                      : 'No'}
+                  </Td>
+                  <Td>{row.accessType}</Td>
+                  <Td>{row.numMembers}</Td>
+                  <Td>{row.maxMembers}</Td>
+                  <Td>
+                    {row.accessType === 'Open' && (
+                      <Button
+                        id={row.familyID}
+                        onClick={() =>
+                          handleLeave(
+                            row.familyID,
+                            row.leaderName === userContent.userName
+                              ? true
+                              : false
+                          )
+                        }
+                      >
+                        Leave
+                      </Button>
+                    )}
+                  </Td>
+                </Tr>
+              )
+          )}
+        </Tbody>
+      </Table>
       {/* 
       <MyCourses>
 

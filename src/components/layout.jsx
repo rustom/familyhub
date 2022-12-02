@@ -4,8 +4,18 @@ import theme from 'styles/theme'
 import AccessDenied from './access-denied'
 import { useSession } from 'next-auth/react'
 import Navigation from './navigation'
-import { Flex, Heading, useColorMode, Button, Text, Center, Container, VStack, Link, Divider } from '@chakra-ui/react'
-
+import {
+  Flex,
+  Heading,
+  useColorMode,
+  Button,
+  Text,
+  Center,
+  Container,
+  VStack,
+  Link,
+  Divider,
+} from '@chakra-ui/react'
 
 const Wrapper = styled.main`
   margin: 0;
@@ -50,7 +60,12 @@ export default function Layout({ children }) {
   const { data: session } = useSession()
 
   return (
-    <Flex height='100vh' flex-direction='column' justifyContent='flex-start' alignItems='flex-between'>
+    <Flex
+      height="100vh"
+      flex-direction="column"
+      justifyContent="flex-start"
+      alignItems="flex-between"
+    >
       {/* <Wrapper> */}
       {/* <Center> */}
       {!session && <AccessDenied />}
@@ -58,8 +73,7 @@ export default function Layout({ children }) {
         <Container maxW={'1000px'}>
           <Navigation />
           {/* <Divider /> */}
-          <VStack alignItems='flex-start'>
-
+          <VStack alignItems="flex-start">
             {children}
 
             {/* <Divider /> */}
@@ -67,7 +81,6 @@ export default function Layout({ children }) {
           <Header />
         </Container>
       )}
-
     </Flex>
   )
 }

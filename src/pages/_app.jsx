@@ -24,7 +24,7 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ChakraProvider theme={theme}>
-          <Component {...pageProps} />
+        <Component {...pageProps} />
       </ChakraProvider>
     </SessionProvider>
   )
