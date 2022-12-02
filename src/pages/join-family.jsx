@@ -95,6 +95,24 @@ export default function JoinFamily() {
     setSubmitted(submitted + 1)
   }
 
+  const handleAutoJoin = (service, keyword) => {
+    console.log(service, leaderKey)
+
+    const postData = async () => {
+      const res = await fetch('/api/membership/auto-join', {
+        method: 'POST',
+        body: JSON.stringify({
+          service: service,
+          keyword: keyword
+        }),
+      })
+      await res.json()
+    }
+    // postData()
+
+    alert('Auto-joined a family! Your info should now be updated.')
+  }
+
   // If session exists, display content
   return (
     <Layout>
@@ -126,6 +144,9 @@ export default function JoinFamily() {
         />
       </FormLabel>
       <br /> <br />
+      <Button onClick={() => handleAutoJoin(subscriptionService, leaderKeyword)}>Auto-Join</Button>
+      <br /> <br />
+
       {/* <input type="submit" value="Submit" /> */}
       {/* </form> */}
       <Table variant="striped">
