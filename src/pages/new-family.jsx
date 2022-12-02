@@ -3,7 +3,14 @@ import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import AccessDenied from '../components/access-denied'
 import styled from 'styled-components'
-import { FormControl, Heading, Text, FormLabel, Select, Button } from '@chakra-ui/react'
+import {
+  FormControl,
+  Heading,
+  Text,
+  FormLabel,
+  Select,
+  Button,
+} from '@chakra-ui/react'
 
 const MyCourses = styled.div``
 
@@ -32,7 +39,6 @@ export default function NewFamily() {
   const [subscriptionService, setSubscriptionService] = useState('')
   const [subscriptionServices, setSubscriptionServices] = useState()
   const [accessType, setAccessType] = useState('Open')
-
 
   // Fetch content from protected route
   useEffect(() => {
@@ -95,7 +101,7 @@ export default function NewFamily() {
         body: JSON.stringify({
           leaderID: userContent.userID,
           accessType: accessType,
-          serviceName: subscriptionService
+          serviceName: subscriptionService,
         }),
       })
       // await res.json()
@@ -110,7 +116,9 @@ export default function NewFamily() {
       <Heading>New Family</Heading>
 
       <Text>
-        Here, you can create a new family that other users can join. Select which subscription service your family is for and whether you'd like your group to be open or closed.
+        Here, you can create a new family that other users can join. Select
+        which subscription service your family is for and whether you'd like
+        your group to be open or closed.
       </Text>
 
       <FormControl onSubmit={submit}>

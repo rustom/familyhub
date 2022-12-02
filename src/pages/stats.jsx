@@ -40,10 +40,8 @@ export default function Stats() {
   return (
     <Layout>
       <Heading>Site Statistics</Heading>
-
-      <Heading size='md'>Universities by Number of Pending Invitations</Heading>
-
-      <Table variant='striped'>
+      <Heading size="md">Universities by Number of Pending Invitations</Heading>
+      <Table variant="striped">
         <Thead>
           <Tr>
             <Th>University Name</Th>
@@ -51,7 +49,6 @@ export default function Stats() {
           </Tr>
         </Thead>
         <Tbody>
-
           {pendingUsersContent?.map((row) => (
             <Tr>
               <Td>{row.universityName}</Td>
@@ -61,9 +58,10 @@ export default function Stats() {
         </Tbody>
       </Table>
       <br /> <br />
-      <Heading size='md'>Universities and Services by Number of Accepted Invitations</Heading>
-
-      <Table variant='striped'>
+      <Heading size="md">
+        Universities and Services by Number of Accepted Invitations
+      </Heading>
+      <Table variant="striped">
         <Thead>
           <Tr>
             <Th>University Name</Th>
@@ -72,7 +70,6 @@ export default function Stats() {
           </Tr>
         </Thead>
         <Tbody>
-
           {acceptedUsersContent?.map((row) => (
             <Tr>
               <Td>{row.universityName}</Td>

@@ -2,8 +2,15 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from 'components/layout'
 import styled from 'styled-components'
-import { Heading, Text, FormControl, Input, Select, FormLabel, Button } from '@chakra-ui/react'
-
+import {
+  Heading,
+  Text,
+  FormControl,
+  Input,
+  Select,
+  FormLabel,
+  Button,
+} from '@chakra-ui/react'
 
 const MyCourses = styled.div``
 
@@ -68,9 +75,7 @@ export default function UserSettings() {
         linked to your sign in.
       </Text>
       <FormControl onSubmit={handleSubmit}>
-        <Text>
-          Name:
-        </Text>
+        <Text>Name:</Text>
         <FormLabel>
           <Input
             type="text"

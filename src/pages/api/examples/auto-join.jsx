@@ -7,8 +7,27 @@ export default async function handler(req, res) {
   const inputData = JSON.parse(req.body)
 
   const query = `
-  insert into Family (leaderID, accessType, serviceName) 
-  values (${inputData.leaderID}, '${inputData.accessType}', '${inputData.serviceName}')
+  insert into Membership values (${inputData.memberID}, (
+    select f.FamilyID
+    from Family f
+    left join SubscriptionService s
+      on f.serviceName = s.serviceName
+    left join User us
+      on f.leaderID = us.userID
+    left join University u
+      on us.universityID = u.universityID
+    left join (
+      select fa.familyID, if(count(*) < 0, 0, count(*)) as numMembers
+      from Family fa
+      natural join Membership mem
+      where mem.memberStatus = 'Accepted'
+      group by fa.familyID
+    ) subq on subq.familyID = f.familyID
+    where f.serviceName like '%${inputData.serviceName}%'
+    and subq.numMembers < s.maxMembers
+    and f.accessType = 'Open'
+    limit 1
+  ), 'Accepted')
   `.replace(/(\r\n|\n|\r)/gm, '')
 
   // The below membership creation query has been replaced by our SQL trigger, which was created in the GCP cloud console
@@ -41,7 +60,6 @@ export default async function handler(req, res) {
     })
 
     await connection.execute(query)
-    await connection.execute(membershipQuery)
 
     await connection.end()
     // return res.send(JSON.parse(JSON.stringify(rows)))

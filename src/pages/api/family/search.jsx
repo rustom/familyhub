@@ -6,7 +6,8 @@ export default async function handler(req, res) {
   // const session = await unstable_getServerSession(req, res, authOptions)
 
   console.log(req.query)
-  const query = `select f.familyID, us.userName as leaderName, f.accessType, f.serviceName, subq.numMembers, s.maxMembers
+  const query =
+    `select f.familyID, us.userName as leaderName, f.accessType, f.serviceName, subq.numMembers, s.maxMembers
   from Family f
   left join SubscriptionService s
   on f.serviceName = s.serviceName

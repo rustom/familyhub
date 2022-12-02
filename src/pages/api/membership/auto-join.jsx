@@ -7,8 +7,44 @@ export default async function handler(req, res) {
   const inputData = JSON.parse(req.body)
 
   const query = `
-  insert into Family (leaderID, accessType, serviceName) 
-  values (${inputData.leaderID}, '${inputData.accessType}', '${inputData.serviceName}')
+  delimiter $$
+  set transaction isolation level repeatable read;
+  start transaction;
+
+  create temporary table tempGroups (
+    select f.FamilyID, f.accessType, f.serviceName
+    from Family f
+    left join SubscriptionService s
+      on f.serviceName = s.serviceName
+    left join User us
+      on f.leaderID = us.userID
+    left join University u
+      on us.universityID = u.universityID
+    left join (
+      select fa.familyID, if(count(*) < 0, 0, count(*)) as numMembers
+      from Family fa
+      natural join Membership mem
+      where mem.memberStatus = 'Accepted'
+      group by fa.familyID
+    ) subq on subq.familyID = f.familyID
+    where f.serviceName like '%${inputData.serviceName}%'
+    and subq.numMembers < s.maxMembers
+  );
+
+  set @family := (select familyID
+    from Family
+    natural join (select familyID from tempGroups) temp
+    where accessType = 'Open'
+    limit 1);
+
+  insert into Membership values (${inputData.memberID}, @family, 'Accepted');
+
+  drop table tempGroups;
+  
+  commit;
+  $$
+
+  delimiter ;
   `.replace(/(\r\n|\n|\r)/gm, '')
 
   // The below membership creation query has been replaced by our SQL trigger, which was created in the GCP cloud console
