@@ -141,7 +141,7 @@ export default function Home() {
               <Tr>
                 <Td>{row.familyID}</Td>
                 <Td>{row.serviceName}</Td>
-                <Td>{row.leaderName && row.leaderName === userContent.userName ? 'Yes' : 'No'}</Td>
+                <Td>{userContent && (userContent.userID && row.leaderID == userContent.userID ? 'Yes' : 'No')}</Td>
                 <Td>{row.accessType}</Td>
                 <Td>{row.numMembers}</Td>
                 <Td>{row.maxMembers}</Td>
