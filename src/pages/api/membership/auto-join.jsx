@@ -7,29 +7,36 @@ export default async function handler(req, res) {
   const inputData = JSON.parse(req.body)
 
   const query = `
-  start transaction;
   set transaction isolation level repeatable read;
+  start transaction;
 
-  set @group = select f.familyID, us.userName as leaderName, f.accessType, f.serviceName, subq.numMembers, s.maxMembers
-  from Family f
-  left join SubscriptionService s
-    on f.serviceName = s.serviceName
-  left join User us
-    on f.leaderID = us.userID
-  left join University u
-    on us.universityID = u.universityID
-  left join (
-    select fa.familyID, count(*) as numMembers
-    from Family fa
-    natural join Membership mem
-    where mem.memberStatus = 'Accepted'
-    group by fa.familyID
-  ) subq on subq.familyID = f.familyID
-  and f.serviceName like '%${req.query.serviceName}%'
-  and subq.numMembers < s.maxMembers;
+  set @family := (select familyID
+    from Family
+    natural join (
+      select f.familyID
+        from Family f
+        left join SubscriptionService s
+          on f.serviceName = s.serviceName
+        left join User us
+          on f.leaderID = us.userID
+        left join University u
+          on us.universityID = u.universityID
+        left join (
+          select fa.familyID, if(count(*) < 0, 0, count(*)) as numMembers
+          from Family fa
+          natural join Membership mem
+          where mem.memberStatus = 'Accepted'
+          group by fa.familyID
+        ) subq on subq.familyID = f.familyID
+        where f.serviceName like '%Spotify%'
+        and subq.numMembers < s.maxMembers
+    ) f2
+    where accessType = 'Open'
+    limit 1);
 
-
-  insert into Membership values (${inputData.memberID}, ${inputData.familyID}, 'Accepted')
+  insert into Membership values (${inputData.memberID}, @family, 'Accepted');
+  
+  commit;
   `.replace(/(\r\n|\n|\r)/gm, '')
 
   // The below membership creation query has been replaced by our SQL trigger, which was created in the GCP cloud console
