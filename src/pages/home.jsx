@@ -132,6 +132,7 @@ export default function Home() {
 
       <Divider />
 
+<<<<<<< HEAD
       <Heading>Current Families</Heading>
       <Table variant="striped">
         <Thead>
@@ -182,6 +183,40 @@ export default function Home() {
           )}
         </Tbody>
       </Table>
+=======
+        <Heading>
+          Current Families
+        </Heading>
+        <Table variant='striped'>
+          <Thead>
+            <Tr>
+              <Th>Family ID</Th>
+              <Th>Subscription Service</Th>
+              <Th>Leader</Th>
+              <Th>Access Type</Th>
+              <Th>Current Members</Th>
+              <Th>Max Members</Th>
+              <Th>Leave Family</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+          {
+            familyData?.map((row) => (
+              row.familyID &&
+              <Tr>
+                <Td>{row.familyID}</Td>
+                <Td>{row.serviceName}</Td>
+                <Td>{userContent && (userContent.userID && row.leaderID == userContent.userID ? 'Yes' : 'No')}</Td>
+                <Td>{row.accessType}</Td>
+                <Td>{row.numMembers}</Td>
+                <Td>{row.maxMembers}</Td>
+                <Td>{row.accessType === 'Open' && <Button id={row.familyID} onClick={() => handleLeave(row.familyID, row.leaderName === userContent.userName ? true : false)}>Leave</Button>}</Td>
+              </Tr>
+            ))
+          }
+          </Tbody>
+        </Table>
+>>>>>>> main
       {/* 
       <MyCourses>
 
