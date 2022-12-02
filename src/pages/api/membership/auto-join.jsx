@@ -28,7 +28,7 @@ export default async function handler(req, res) {
           where mem.memberStatus = 'Accepted'
           group by fa.familyID
         ) subq on subq.familyID = f.familyID
-        where f.serviceName like '%Spotify%'
+        where f.serviceName like '%${inputData.serviceName}%'
         and subq.numMembers < s.maxMembers
     ) f2
     where accessType = 'Open'
